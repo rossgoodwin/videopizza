@@ -67,8 +67,12 @@ def buildSrt(lines):
         print('',file=fh)
     fh.close()
 
-narrow_mode=False
-buildSrt(ttmlToLines(parseTTML(getCapUrl(getProgid(sys.argv[1]))),narrow_mode))
+if __name__ == "__main__":
+    if len(sys.argv)<2:
+        print("Usage: cspan.py cspanurl outfile")
+    else:
+        narrow_mode=False
+        buildSrt(ttmlToLines(parseTTML(getCapUrl(getProgid(sys.argv[1]))),narrow_mode))
 
 
 
