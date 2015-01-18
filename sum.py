@@ -79,5 +79,8 @@ def summarize(subfile, ll):
     return [sentences[i] for i in tgtIndx]
 
 
+# print summarize('video/Underground LSD Palace-r7qliVpGEk0.en.srt', 5)
+
+
 
 
