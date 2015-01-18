@@ -4,5 +4,5 @@ flask==0.10.1
 
 #moviepy==0.2.1.8.02
 
-git+https://github.com/imageio/imageio.git
-moviepy==0.2.2.03
+#git+https://github.com/imageio/imageio.git
+#moviepy==0.2.2.03

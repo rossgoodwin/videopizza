@@ -19,8 +19,6 @@ def summary():
 		vidURL = request.form['videourl']
 		gifNames = cspan.processUrl(vidURL)
 
-		sleep(15)
-
 		return render_template("gifs.html", gif1=gifNames[0], gif2=gifNames[1], gif3=gifNames[2], 
 											gif4=gifNames[3], gif5=gifNames[4], gif6=gifNames[5], 
 											gif7=gifNames[6], gif8=gifNames[7], gif9=gifNames[8],

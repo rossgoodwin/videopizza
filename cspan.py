@@ -7,9 +7,12 @@ import re
 import requests
 import subprocess
 import sys
-from moviepy.editor import *
+# from moviepy.video.io.VideoFileClip import VideoFileClip
+# import moviepy.config as cf
 import en
 
+# cf.change_settings({"FFMPEG_BINARY": "/usr/local/bin/ffmpeg"})
+# print( cf.get_setting("FFMPEG_BINARY") )
 
 def getProgid(pageurl):
     page = html.parse(pageurl).getroot()
@@ -83,20 +86,25 @@ def summarizeSentences(sentences,count=12):
     return sentences[:count]
 
 def makeGifs(sentences):
-    clip = VideoFileClip("../../foo.mp4", audio=False)
+    # clip = VideoFileClip("foo.mp4", audio=False)
     out = []
     for i,s in enumerate(sentences):
-        clip.subclip(float(s['begin']),float(s['end']))
+        ss = str(int(float(s['begin'])))
+        t = str(int(float(s['end'])-float(s['begin'])))
+        fn = 'static/gifs/%d.mp4'%i
+        subprocess.call(["ffmpeg","-ss",ss,"-t",t,"-i","../../foo.mp4","-y",fn])
+        # clip.subclip(float(s['begin']),float(s['end']))
         # clip.to_gif('gifs/%d.gif'%i, fps=1)
         # txt_clip = ( TextClip(" ".join(s['words']),fontsize=70,color='white')
         #      .set_position('center')
         #      .set_duration(15) )
 
         # result = CompositeVideoClip([clip, txt_clip])
-        fn = 'static/gifs/%d.mp4'%i
-        clip.to_videofile(fn, codec="libx264")
-        fns.append(fn)
-    return fns
+        # fn = 'static/gifs/%d.mp4'%i
+        # clip.to_gif('gifs/%d.gif'%i, fps=1, program="ffmpeg")
+        # clip.to_videofile(fn, codec="libx264")
+        out.append(" ".join(s['words']))
+    return out
 
 
 def fmtSrtTime(secs):
