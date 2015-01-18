@@ -17,7 +17,9 @@ def hello():
 def summary():
 	if request.method == 'POST':
 		vidURL = request.form['videourl']
+		gifNames = ["" for x in xrange(12)]
 		gifNames = cspan.processUrl(vidURL)
+
 
 		return render_template("gifs.html", gif1=gifNames[0], gif2=gifNames[1], gif3=gifNames[2], 
 											gif4=gifNames[3], gif5=gifNames[4], gif6=gifNames[5], 
