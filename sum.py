@@ -15,8 +15,8 @@ allSubLines = subText.split('\n')
 textLines = []
 
 for line in allSubLines:
-	if len(line) > 0 and line[0] in string.ascii_letters:
-		textLines.append(line)
+    if len(line) > 0 and line[0] in string.ascii_letters:
+        textLines.append(line)
 
 text = ' '.join(textLines)
 
@@ -32,8 +32,8 @@ imp_words = [words[i] for i in range(len(words)) if tags[i] in accept_pos and no
 word_counts = dict(Counter(imp_words).most_common())
 
 for w in words:
-	if not w in word_counts.keys():
-		word_counts[w] = 0
+    if not w in word_counts.keys():
+        word_counts[w] = 0
 
 # word_map = [(w, word_counts[w]) for w in words]
 endPunc = ['.', '?', '!']
@@ -50,21 +50,21 @@ curSentenceScore = 0
 curSentenceLength = 0
 
 for w in words:
-	curSentenceScore += word_counts[w]
-	curSentenceLength += 1
-	if w[-1] in endPunc or "." in w:
-		sentenceScores.append(curSentenceScore)
-		sentenceLengths.append(curSentenceLength)
-		curSentenceScore = 0
-		curSentenceLength = 0
+    curSentenceScore += word_counts[w]
+    curSentenceLength += 1
+    if w[-1] in endPunc or "." in w:
+        sentenceScores.append(curSentenceScore)
+        sentenceLengths.append(curSentenceLength)
+        curSentenceScore = 0
+        curSentenceLength = 0
 
 print len(sentenceScores)
 print len(sentenceLengths)
 
 if len(sentences) == len(sentenceScores) == len(sentenceLengths):
-	print "EVERYTHING WORKED!"
+    print "EVERYTHING WORKED!"
 else:
-	print "SOMETHING BROKE!"
+    print "SOMETHING BROKE!"
 
 normSentenceScores = [{'index': i, 'score': sentenceScores[i]} for i in range(len(sentences))]
 
@@ -76,8 +76,8 @@ tgtIndx = [d['index'] for d in normSentenceScores[:10]]
 tgtIndx.sort()
 
 for i in tgtIndx:
-	print sentences[i]
-	print sentenceScores[i]
+    print sentences[i]
+    print sentenceScores[i]
 
 
 
