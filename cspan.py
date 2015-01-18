@@ -7,7 +7,7 @@ import re
 import requests
 import subprocess
 import sys
-from moviepy.video.io.VideoFileClip import VideoFileClip
+from moviepy.editor import *
 import en
 
 
@@ -83,13 +83,20 @@ def summarizeSentences(sentences,count=12):
     return sentences[:count]
 
 def makeGifs(sentences):
-    clip = VideoFileClip("foo.mp4", audio=False)
-
+    clip = VideoFileClip("../../foo.mp4", audio=False)
+    out = []
     for i,s in enumerate(sentences):
-        print(" ".join(s['words']))
         clip.subclip(float(s['begin']),float(s['end']))
-        clip.to_gif('gifs/%d.gif'%i, fps=1)
-        clip.to_videofile('gifs/%d.mp4'%i, codec="libx264")
+        # clip.to_gif('gifs/%d.gif'%i, fps=1)
+        # txt_clip = ( TextClip(" ".join(s['words']),fontsize=70,color='white')
+        #      .set_position('center')
+        #      .set_duration(15) )
+
+        # result = CompositeVideoClip([clip, txt_clip])
+        fn = 'static/gifs/%d.mp4'%i
+        clip.to_videofile(fn, codec="libx264")
+        fns.append(fn)
+    return fns
 
 
 def fmtSrtTime(secs):

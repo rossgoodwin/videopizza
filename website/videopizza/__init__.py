@@ -2,7 +2,10 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from time import sleep
-# import cspan
+
+import sys
+sys.path.append("../..")
+import cspan
 
 app = Flask(__name__)
 
@@ -14,7 +17,7 @@ def hello():
 def summary():
 	if request.method == 'POST':
 		vidURL = request.form['videourl']
-		gifNames = processUrl(vidURL)
+		gifNames = cspan.processUrl(vidURL)
 
 		sleep(15)
 
