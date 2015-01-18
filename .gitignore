@@ -3,3 +3,4 @@ vidpiz/
 ve/
 website/videopizza/vidpiz/
 website/videopizza/vp/
+*.pyc
